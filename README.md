@@ -25,7 +25,7 @@ Easiest way to get started:
 * add some modules you like to save as favorites
 * on MyLittleFavorites press the "Heart-Button" (it turns red, you're in "edit-mode")
 * now the 8 dots give you a list of currently loaded modules
-* you can save one module per dot
+* you can save one module per dot, by clicking on the dot from list
 * now press the "Heart-Button" again (it turns black, you're in "selector-mode")
 * now you can recall the modules by pressing the dots
 
