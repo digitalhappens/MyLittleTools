@@ -8,8 +8,8 @@ contains (at the moment) one module:
 
 ## MyLittleFavorites, favorite module handling
 
-The release of VCV Rack 1.0, which contains many great new features, enhancements and changes. 
-There's only one features missing, a good way to organize favorite modules in a patch.
+The release of VCV Rack 1.0 contains many great new features, enhancements and changes. 
+There's only one features missing (I think), a good way to organize favorite modules in a patch.
 In version 0.6 we had a favorite button, but this was globally, with MyLittleFavorites
 you can handle up to 8 self-defined favorite modules per instance.
 
