@@ -7,6 +7,13 @@
 #include <ui/Tooltip.hpp>
 
 
+static const char* convertAndCombine(std::string input1, int input2)
+{
+  char* buffer = new char[256];
+  sprintf (buffer, "%s%d",input1.c_str(), input2);
+  return buffer;
+}
+
 struct MyLittleTools : Module {
   enum ParamIds {
     NUM_PARAMS
@@ -41,7 +48,7 @@ struct MyLittleTools : Module {
   }
 
  void RaiseModel(std::string plugin, std::string module)
-  {
+ {
     Model *model = rack::plugin::getPlugin(plugin)->getModel(module);
     if (model)
     {
@@ -55,13 +62,6 @@ struct MyLittleTools : Module {
       h->setModule(moduleWidget);
       APP->history->push(h);
     }
-  }
-
-  const char* convertAndCombine(std::string input1, int input2)
-  {
-    char* buffer = new char[256];
-    sprintf (buffer, "%s%d",input1.c_str(), input2);
-    return buffer;
   }
 
   void setEditMode(bool value)
@@ -108,8 +108,6 @@ struct MyLittleTools : Module {
   }
 
   json_t *dataToJson() override {
-      //json_t *rootJ = ModuleWidget::toJson();
-
       json_t *rootJ = json_object();
 
       for (int i = 0; i < 8; i++)
@@ -129,7 +127,7 @@ struct MyLittleTools : Module {
 
     for (int i = 0; i < 8; i++)
     {
-      json_t *plug = json_object_get(rootJ, convertAndCombine("plugin", i)); 
+      json_t *plug = json_object_get(rootJ, convertAndCombine("plugin", i));
       json_t *mod = json_object_get(rootJ, convertAndCombine("module", i));  
 
       if (plug)
@@ -161,22 +159,42 @@ struct ModuleMenuItem : ui::MenuItem {
     }
 };
 
-
 struct heartButton : SvgButton {
     MyLittleTools *module;
 
     std::shared_ptr<Svg> svg1;
     std::shared_ptr<Svg> svg2;
 
+    ui::Label *labelEditMode;
+
     heartButton() {
       svg1 = APP->window->loadSvg(asset::plugin(pluginInstance, "res/heart1.svg"));
       svg2 = APP->window->loadSvg(asset::plugin(pluginInstance, "res/heart2.svg"));
 
       addFrame(svg1);
+
+
+    labelEditMode = new ui::Label;
+    // brandLabel->fontSize = 16;
+    labelEditMode->box.pos.x = 22;
+    labelEditMode->box.pos.y = 0;
+    labelEditMode->color = nvgRGB(0x30, 0x30, 0x30);
+    //labelEditMode->text = "edit mode";
+    addChild(labelEditMode);
+    viewEditMode(false);
+
     }
 
   void setModule(MyLittleTools *module) {
     this->module = module;
+  }
+
+  void viewEditMode(bool mode)
+  {
+    if (mode)
+      labelEditMode->text = "edit mode";
+    else
+      labelEditMode->text = "<- edit";
   }
 
   virtual void onAction(const event::Action &e) override {
@@ -184,11 +202,13 @@ struct heartButton : SvgButton {
     {
       module->setEditMode(false);
       frames[0] = svg1;
+      viewEditMode(false);
     }
     else
     {
       module->setEditMode(true);
       frames[0] = svg2;
+      viewEditMode(true);
     }
   }
 };
@@ -196,14 +216,45 @@ struct heartButton : SvgButton {
 struct slotButton : SvgButton {
   MyLittleTools *module;
   int buttonid;
+  ui::Label *labelName;
 
   slotButton() {
     addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/sb0.svg")));
     addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/sb1.svg")));
+
+    labelName = new ui::Label;
+    labelName->box.pos.x = 5;
+    labelName->box.pos.y = 2;
+    labelName->color = nvgRGB(0x10, 0x10, 0x10);
+    
+    addChild(labelName);
   }
+
+
+  void step() override {
+    if (module)
+      setLabelName();
+
+    Widget::step();
+  }
+
 
   void setModule(MyLittleTools *module) {
     this->module = module;
+  }
+
+  void setLabelName()
+  {
+    if (module)
+    {
+      std::string str = module->getSavedModule(buttonid);
+      unsigned sz = str.size();
+      if (sz > 15)
+        str.resize(sz+3,'.');
+
+      if (labelName->text != str)
+        labelName->text = str;
+    }
   }
 
   virtual void onAction(const event::Action &e) override {
@@ -212,7 +263,10 @@ struct slotButton : SvgButton {
     else
     {
       if (module->getSavedPlugin(buttonid) != "")
+      {
+        labelName->text = module->getSavedModule(buttonid);
         module->RaiseModel(module->getSavedPlugin(buttonid), module->getSavedModule(buttonid));
+      }
     }
   }
 
@@ -254,23 +308,26 @@ struct MyLittleFavoritesWidget : ModuleWidget {
     addChild(createWidget<ScrewSilver>(Vec(0, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
     addChild(createWidget<ScrewSilver>(Vec(box.size.x - RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-    textField = createWidget<LedDisplayTextField>(Vec(5, 58));
-    textField->box.size = Vec(50, 29);
+    textField = createWidget<LedDisplayTextField>(Vec(9, 58));
+    textField->box.size = Vec(131, 29);
     addChild(textField);
 
-    heartButton *hb = createWidget<heartButton>(Vec(28, 24));
+    heartButton *hb = createWidget<heartButton>(Vec(38, 24));
     hb->setModule(module);
-    //hb->loadFrame();
     addChild(hb);
 
     int ystart = 105;
     int yjump = 32;
 
+    //*sb = new slotButton[8];
+
     for (int i = 0; i < 8; i++)
     {
-      slotButton *sb = createWidget<slotButton>(Vec(18, ystart));
+      slotButton *sb;
+      sb = createWidget<slotButton>(Vec(9, ystart));
       sb->setModule(module);
       sb->buttonid = i;
+      sb->setLabelName();
       addChild(sb);
       ystart += yjump;
     }
