@@ -37,9 +37,7 @@ Changes in Version 1.0.1
 Each instance of MyLittleFavorites can hold different favorites and is saved within the patch or autosave-patch of vcv rack.
 You can save presets, to recall your favorites in other patches.
 
-
-
-
+![MyLittleFavorites](https://raw.githubusercontent.com/digitalhappens/MyLittleTools/master/screenshots/MyLittleFavoritesExample.jpg)
 
 ## Contributing
 
