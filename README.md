@@ -23,14 +23,23 @@ Easiest way to get started:
 * Make an empty patch (Ctrl+N)
 * add MyLittleFavorites
 * add some modules you like to save as favorites
-* on MyLittleFavorites press the "Heart-Button" (it turns red, you're in "edit-mode")
-* now the 8 dots give you a list of currently loaded modules
-* you can save one module per dot, by clicking on the dot from list
-* now press the "Heart-Button" again (it turns black, you're in "selector-mode")
-* now you can recall the modules by pressing the dots
+* on MyLittleFavorites press the "Heart-Button" (it turns red, you're in "editmode")
+* now the 8 fields give you a list of currently loaded modules
+* you can save one module per field, by clicking on the field from list
+* now press the "Heart-Button" again (it turns black)
+* now you can recall the modules by pressing the fields
+
+Changes in Version 1.0.1
+
+* Module is wider
+* the dots for module recall are now lables/fields with the name of saved the module
 
 Each instance of MyLittleFavorites can hold different favorites and is saved within the patch or autosave-patch of vcv rack.
 You can save presets, to recall your favorites in other patches.
+
+
+
+
 
 ## Contributing
 
