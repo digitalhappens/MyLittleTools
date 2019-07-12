@@ -16,6 +16,16 @@ you can handle up to 8 self-defined favorite modules per instance.
 You can have as many instances in a patch within VCV Rack as you want. For better organization,
 each instance of the module can have a unique name like "BASIC" or "VCO".
 
+As a new feature, MyLittleFavorites now saves the state of the module, which means you can use this as (kind of) fast preset loader...
+
+
+## MyLittleTags, tag browsing
+
+At this time unfinished... this new module, make it possible to browser through the tags the oldway (without screenshots). The heartbutton siwtches through the tags (because there are more than 8 tags/categories). Note this module shows only tags which have plugins/modules in it. 
+
+In the future this module will be able to hide specific modules for easier and pointed browsing.
+
+
 ### How to use
 
 Easiest way to get started:
@@ -28,6 +38,10 @@ Easiest way to get started:
 * you can save one module per field, by clicking on the field from list
 * now press the "Heart-Button" again (it turns black)
 * now you can recall the modules by pressing the fields
+
+Changes in Version 1.0.2
+
+* each Module is now saved with the complete state of the module (paramters and data)
 
 Changes in Version 1.0.1
 
