@@ -112,6 +112,7 @@ void RaiseModelSimple(std::string plugin, std::string module)
   void listTags()
   {
     bool tagFounded = false;
+    tagsCount = 0;
     for (const std::string &tag : plugin::allowedTags) {
       for (const auto& p : rack::plugin::plugins) 
       {
@@ -128,7 +129,7 @@ void RaiseModelSimple(std::string plugin, std::string module)
           {
             if (!t.compare(trim(tag))) 
             {
-              for (int i = 0; i < tagsCount; i ++)
+              for (int i = 0; i < tagsCount; i++)
               {
                 if (tags[i] == tag)
                 {
@@ -393,12 +394,12 @@ struct slotButton : SvgButton {
     {
       if (module)
       {
-        if (!module->_bTagsListed)
+       /* if (!module->_bTagsListed)
         {
           module->listTags();
           module->_bTagsListed = true;
         }
-        
+        */
         if (module->_bTagsListed)
         {
           if (buttonid == 0 && module->tags[module->_tagsListJump] == "")
@@ -439,6 +440,7 @@ struct slotButton : SvgButton {
   virtual void onAction(const event::Action &e) override {
     if (IAM == "MyLittleFavorites")
     {
+      module->_slot = buttonid;
       if (module->getEditMode())
         makeContextMenuOnButton(buttonid);
       else
@@ -527,7 +529,7 @@ struct MyLittleFavoritesWidget : ModuleWidget {
 
     MyLittleFavoritesWidget(MyLittleTools *module) {
 
-		setModule(module);
+    setModule(module);
     setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/MyLittleFavorites.svg")));
 
     addChild(createWidget<ScrewSilver>(Vec(0, 0)));
