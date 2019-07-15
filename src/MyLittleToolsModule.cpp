@@ -305,7 +305,7 @@ struct PresetBrowserMenuItem : ui::MenuItem {
     void onAction(const event::Action &e) override 
     {
         ModuleWidget *moduleWidget = APP->scene->rack->getModule(module->id);
-
+        moduleWidget->resetAction();
         moduleWidget->loadAction(asset::user("presets") + "/" + presetName);
     }
 
