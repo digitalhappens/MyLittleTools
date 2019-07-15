@@ -4,8 +4,18 @@
 #include <algorithm>
 #include <functional>
 #include <random>
+#include <libgen.h> // for dirname and basename
 #include <ui/Tooltip.hpp>
 
+
+/*
+  Features to be added:
+
+  * renameing favorties (so this makes it a module/preset browser)
+  * make it 8x8 bank in one module
+
+
+*/
 
 
 static inline std::string trim(std::string str)
@@ -282,6 +292,93 @@ struct ModuleMenuItem : ui::MenuItem {
 };
 
 
+struct PresetBrowserMenuItem : ui::MenuItem {
+    MyLittleTools *module;
+
+    std::string IAM;
+    std::string presetName;
+
+    void setModule(MyLittleTools *module) {
+      this->module = module;
+    }
+
+    void onAction(const event::Action &e) override 
+    {
+        ModuleWidget *moduleWidget = APP->scene->rack->getModule(module->id);
+
+        moduleWidget->loadAction(asset::user("presets") + "/" + presetName);
+    }
+
+    void loadAction(std::string filename) {
+      INFO("Loading preset %s", filename.c_str());
+
+      FILE *file = fopen(filename.c_str(), "r");
+      if (!file) {
+        WARN("Could not load patch file %s", filename.c_str());
+        return;
+      }
+      DEFER({
+        fclose(file);
+      });
+
+      json_error_t error;
+      json_t *moduleJ = json_loadf(file, 0, &error);
+      if (!moduleJ) {
+        std::string message = string::f("File is not a valid patch file. JSON parsing error at %s %d:%d %s", error.source, error.line, error.column, error.text);
+        //osdialog_message(OSDIALOG_WARNING, OSDIALOG_OK, message.c_str());
+        return;
+      }
+      DEFER({
+        json_decref(moduleJ);
+      });
+
+    
+      module->fromJson(moduleJ);
+
+    }
+
+
+};
+
+struct presetButton : SvgButton {
+  MyLittleTools *module;
+  std::shared_ptr<Svg> svg1;
+
+  presetButton() {
+    svg1 = APP->window->loadSvg(asset::plugin(pluginInstance, "res/preset1.svg"));
+    addFrame(svg1);
+  }
+
+  void setModule(MyLittleTools *module) {
+    this->module = module;
+  }
+
+  virtual void onAction(const event::Action &e) override {
+    createContextMenu();
+  }
+
+  void createContextMenu() {
+    ui::Menu *menu = createMenu();
+    menu->addChild(createMenuLabel("load a preset (presets starting with mlf_*.vcvm)"));
+
+    std::string path = asset::user("presets");
+    for (const std::string &presetPath : system::getEntries(path)) {
+      char *pathDup = strdup(presetPath.c_str());
+      std::string fn = basename(pathDup);
+      if (fn.rfind("mlf_",0) == 0)
+      {
+        PresetBrowserMenuItem *item1 = new PresetBrowserMenuItem;
+        item1->IAM = "MyLittleFavorites";
+        item1->setModule(module);
+        item1->text = string::filename(presetPath);
+        item1->presetName = string::filename(presetPath);
+        menu->addChild(item1);
+      }
+    }
+  }
+};
+
+
 struct heartButton : SvgButton {
     MyLittleTools *module;
 
@@ -291,13 +388,14 @@ struct heartButton : SvgButton {
     ui::Label *labelEditMode;
     std::string IAM;
 
+    std::vector<std::string> presetPaths;
+
     heartButton() {
       svg1 = APP->window->loadSvg(asset::plugin(pluginInstance, "res/heart1.svg"));
       svg2 = APP->window->loadSvg(asset::plugin(pluginInstance, "res/heart2.svg"));
 
       addFrame(svg1);
       addFrame(svg2);
-
 
     labelEditMode = new ui::Label;
     // brandLabel->fontSize = 16;
@@ -328,24 +426,26 @@ struct heartButton : SvgButton {
     {
       labelEditMode->text = "TAGS";
     }
-
   }
 
   virtual void onAction(const event::Action &e) override {
+    //void onDragStart(const event::DragStart &e) override {
+    
+
     if (IAM == "MyLittleFavorites")
     {
-      if (module->getEditMode())
-      {
-        module->setEditMode(false);
-        frames[0] = svg1;
-        viewEditMode(false);
-      }
-      else
-      {
-        module->setEditMode(true);
-        frames[0] = svg2;
-        viewEditMode(true);
-      }
+        if (module->getEditMode())
+        {
+          module->setEditMode(false);
+          frames[0] = svg1;
+          viewEditMode(false);
+        }
+        else
+        {
+          module->setEditMode(true);
+          frames[0] = svg2;
+          viewEditMode(true);
+        }
     }
 
     if (IAM == "MyLittleTags")
@@ -546,6 +646,23 @@ struct MyLittleFavoritesWidget : ModuleWidget {
     hb->setModule(module);
     addChild(hb);
 
+    presetButton *pb = createWidget<presetButton>(Vec(117, 24));
+    pb->setModule(module);
+    addChild(pb);
+
+    //hb->presetPaths = this->model->presetPaths;
+      /*
+    if (!model->presetPaths.empty())
+      INFO("nicht empty");
+    else
+      INFO("empty");*/
+   // for (const std::string &presetPath : this->model->presetPaths) {
+   //   INFO(string::filename(presetPath).c_str());
+   // } 
+
+
+    
+
     int ystart = 105;
     int yjump = 32;
 
@@ -613,7 +730,6 @@ struct MyLittleTagsWidget : ModuleWidget {
 
     for (int i = 0; i < 8; i++)
     {
-
       slotButton *sb;
       sb = createWidget<slotButton>(Vec(9, ystart));
       sb->IAM = "MyLittleTags";
@@ -625,8 +741,6 @@ struct MyLittleTagsWidget : ModuleWidget {
       addChild(sb);
       ystart += yjump;
     }
-
-    
 
   }
 
