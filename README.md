@@ -29,6 +29,14 @@ Easiest way to get started:
 * now press the "Heart-Button" again (it turns black)
 * now you can recall the modules by pressing the fields
 
+Changes in Version 1.0.2
+
+* now the state of the modules is saved (parameters and data)
+* you can rename an entry (with new R Button)
+* you can clear an entry (with the C Button)
+* when you save Presets in MyLittleFavorites in the global /Rack/presets-Folder starting with "mlf_"
+  the presets can be recalled quickly with the P-Button (so you need only one intance of the module to store all your favorites)
+
 Changes in Version 1.0.1
 
 * Module is wider
@@ -43,5 +51,3 @@ You can save presets, to recall your favorites in other patches.
 
 I welcome Issues and Pull Requests to this repository if you have
 suggestions for improvement. 
-
-This plugin is released under the totally free Public License.
