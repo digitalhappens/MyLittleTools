@@ -188,8 +188,8 @@ void RaiseModelSimple(std::string plugin, std::string module)
 
   void setSavedName(int index, std::string name)
   {
-    if (name != "")
-      _name[index] = name;
+    //if (name != "")
+    _name[index] = name;
   }
 
   void setSlot(int slot)
