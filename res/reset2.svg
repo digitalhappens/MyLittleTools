@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="22.5pt"
+   viewBox="0 0 22.5 22.5"
+   width="22.5pt"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="reset2.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1029"
+     id="namedview10"
+     showgrid="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="11.313709"
+     inkscape:cx="18.918742"
+     inkscape:cy="22.062712"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8"
+     showguides="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid910" />
+  </sodipodi:namedview>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Layer 1" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:1.25;font-family:'Ubuntu Mono';-inkscape-font-specification:'Ubuntu Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.75;"
+     x="1.5"
+     y="9"
+     id="text871"><tspan
+       sodipodi:role="line"
+       id="tspan869"
+       x="1.5"
+       y="36.744141"
+       style="stroke-width:0.75;-inkscape-font-specification:'Ubuntu Mono';font-family:'Ubuntu Mono';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;" /></text>
+  <g
+     aria-label="C"
+     transform="scale(0.8982255,1.1133062)"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.28848457px;line-height:1.25;font-family:Webdings;-inkscape-font-specification:Webdings;letter-spacing:0px;word-spacing:0px;fill:#8c0000;fill-opacity:1;stroke:none;stroke-width:0.55721211"
+     id="text883">
+    <path
+       d="m 15.873288,11.583734 4.32057,1.305966 q -0.435322,1.817469 -1.371264,3.03637 -0.935942,1.218902 -2.328973,1.839236 -1.382147,0.620333 -3.526108,0.620333 -2.601048,0 -4.2552718,-0.75093 Q 7.0689008,16.872896 5.8717654,14.968362 4.67463,13.063828 4.67463,10.092756 4.67463,6.1313262 6.7750585,4.0091316 8.88637,1.876054 12.738969,1.876054 q 3.014605,0 4.734127,1.2189015 1.730405,1.2189015 2.568399,3.7437689 L 15.688276,7.8073158 Q 15.459732,7.0781515 15.209422,6.7407769 14.795866,6.1748584 14.197298,5.870133 13.59873,5.5654076 12.858683,5.5654076 q -1.67599,0 -2.5684,1.3494981 -0.6747487,1.0012405 -0.6747487,3.1452013 0,2.655464 0.8053457,3.645821 0.805346,0.979475 2.263674,0.979475 1.414796,0 2.133078,-0.794463 0.729164,-0.794462 1.055656,-2.307206 z"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, ';stroke-width:0.55721211;fill:#8c0000;fill-opacity:1"
+       id="path873" />
+  </g>
+</svg>
