@@ -22,7 +22,7 @@ This is a simple module that allows fast module browsing by the tag (f.e. Filter
 
 In future versions I will implement a hiding-feature, so you can hide specific modules if you want.
 
-### How to use "My Little Favorites"
+### How to use "MyLittleFavorites"
 
 Easiest way to get started:
 
@@ -41,7 +41,7 @@ Optionally, you can clear a field in clear-mode (withe C-Button), which empties 
 
 Optionally, you can fast-load a preset with the P-Button. When you have filled MyLittleFavorites with 8 of your favorite modules/states, you can save it as a preset. When you name this preset by starting with "mlf_" then this preset will appear in a list with the P-Button, you can then load it by clicking it. This way it is possible to fast switch between as many favorites as you need.
 
-Each favorite is saved with it's state, which means all parameter and data settings are saved by default. 
+Each favorite is saved with it's state, which means all parameter and data settings are saved within by default. 
 
 ![MyLittleFavorites](https://raw.githubusercontent.com/digitalhappens/MyLittleTools/master/screenshots/MyLittleFavoritesExample.jpg)
 
