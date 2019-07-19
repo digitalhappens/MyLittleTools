@@ -54,6 +54,7 @@ Changes in Version 1.0.2
 * you can clear an entry (with the C Button)
 * when you save Presets in MyLittleFavorites in the global /Rack/presets-Folder starting with "mlf_"
   the presets can be recalled quickly with the P-Button (so you need only one intance of the module to store all your favorites)
+* the list of currently loaded modules shows all modules currently loaded, except "MyLittleFavorites"
 
 Changes in Version 1.0.1
 
