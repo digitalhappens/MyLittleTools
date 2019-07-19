@@ -14,7 +14,7 @@ There's only one features missing / lagging (I think), a good way to organize fa
 In version 0.6 we had a favorite button, but this was globally, with MyLittleFavorites
 you can handle up to 8 self-defined favorite modules per instance / preset.
 
-You can have as many instances in a patch within VCV Rack as you want or use the fast preset-loading function to siwtch between favorite module setups. For better organization, each instance of the module can have a unique name like "BASIC" or "VCO".
+You can have as many instances in a patch within VCV Rack as you want or use the fast preset-loading function to switch between favorite module setups. For better organization, each instance of the module can have a unique name like "BASIC" or "VCO".
 
 ## MyLittleTags, tag browsing
 
