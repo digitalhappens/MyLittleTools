@@ -39,7 +39,7 @@ Optionally, you can rename the field names in rename-mode (with the R-Button) fo
 
 Optionally, you can clear a field in clear-mode (withe C-Button), which empties an field by clicking on it. 
 
-Optionally, you can fast-load a preset with the P-Button. When you have filled MyLittleFavorites with 8 of your favorite modules/states, you can save it as a preset. When you name this preset by starting with "mlf_" then this preset will appear in a list with the P-Button, you can then load it by clicking it. This way it is possible to fast switch between as many favorites as you need.
+Optionally, you can fast-load a preset with the P-Button. When you have filled MyLittleFavorites with 8 of your favorite modules/states, you can save it as a preset. When you name this preset by starting with "mlf_" then this preset will appear in a list with the P-Button, you can then load it by clicking it. This way it is possible to fast switch between as many favorites as you need. The presets must be saved in the Rack/presets folder.
 
 Each favorite is saved with it's state, which means all parameter and data settings are saved within by default. 
 
