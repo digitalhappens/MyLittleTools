@@ -188,8 +188,8 @@ void RaiseModelSimple(std::string plugin, std::string module)
 
   void setSavedName(int index, std::string name)
   {
-    //if (name != "")
-    _name[index] = name;
+    if (name != "")
+      _name[index] = name;
   }
 
   void setSlot(int slot)
@@ -812,22 +812,28 @@ struct slotButton : SvgButton {
       json_t *pluginSlugJ = json_object_get(moduleJ, "plugin");
       json_t *modelSlugJ = json_object_get(moduleJ, "model");
 
-      ModuleMenuItem *item1 = new ModuleMenuItem;
-      item1->slot = slot;
-      item1->IAM = "MyLittleFavorites";
-      item1->setModule(module);
 
-      item1->json = new json_t();
-      item1->json = json_deep_copy(json_object_get(mw->module->toJson(), "params"));
+      std::string mn = json_string_value(modelSlugJ);
 
-      item1->jsondata = new json_t();
-      item1->jsondata = json_deep_copy(json_object_get(mw->module->toJson(),"data"));
-      
-      item1->text = json_string_value(pluginSlugJ);
-      item1->rightText = json_string_value(modelSlugJ);
-      item1->pluginName = json_string_value(pluginSlugJ);
-      item1->moduleName = json_string_value(modelSlugJ);
-      menu->addChild(item1);
+      if (mn != "MyLittleFavorites")
+      {
+        ModuleMenuItem *item1 = new ModuleMenuItem;
+        item1->slot = slot;
+        item1->IAM = "MyLittleFavorites";
+        item1->setModule(module);
+
+        item1->json = new json_t();
+        item1->json = json_deep_copy(json_object_get(mw->module->toJson(), "params"));
+
+        item1->jsondata = new json_t();
+        item1->jsondata = json_deep_copy(json_object_get(mw->module->toJson(),"data"));
+        
+        item1->text = json_string_value(pluginSlugJ);
+        item1->rightText = json_string_value(modelSlugJ);
+        item1->pluginName = json_string_value(pluginSlugJ);
+        item1->moduleName = json_string_value(modelSlugJ);
+        menu->addChild(item1);
+      }
     } 
   }
 
