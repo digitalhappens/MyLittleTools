@@ -6,7 +6,11 @@
 #include <random>
 #include <libgen.h> // for dirname and basename
 #include <ui/Tooltip.hpp>
+#include <osdialog.h>
 
+
+
+static const char PRESET_FILTERS[] = "VCV Rack module preset (.vcvm):vcvm";
 
 static inline std::string trim(std::string str)
 {
@@ -22,6 +26,14 @@ static const char* convertAndCombine(std::string input1, int input2)
   sprintf (buffer, "%s%d",input1.c_str(), input2);
   return buffer;
 }
+
+static bool isForbidden( char c )
+{
+    static std::string forbiddenChars( "\\/:?\"<>|*&" );
+    return std::string::npos != forbiddenChars.find( c );
+}
+
+
 
 struct MyLittleTools : Module {
   enum ParamIds {
@@ -42,6 +54,7 @@ struct MyLittleTools : Module {
   std::string* _plugin;
   std::string* _module;
   std::string* _name;
+  json_t *textFieldText;
 
   json_t *_jsondata[8];
   json_t *_json[8];
@@ -53,6 +66,9 @@ struct MyLittleTools : Module {
   bool _resetMode;
   bool _renameMode;
   bool _bTagsListed;
+  bool _allLabelReset;
+  bool _savePreset;
+  bool setTextFieldText;
   std::string tags[100];
   int tagsCount;
 
@@ -68,6 +84,9 @@ struct MyLittleTools : Module {
     _renameMode = false;
     _tagsListJump = 0;
     _bTagsListed = false;
+    _allLabelReset = false;
+    _savePreset = false;
+    setTextFieldText = false;
   }
 
  void RaiseModel(std::string plugin, std::string module)
@@ -188,7 +207,6 @@ void RaiseModelSimple(std::string plugin, std::string module)
 
   void setSavedName(int index, std::string name)
   {
-    if (name != "")
       _name[index] = name;
   }
 
@@ -203,6 +221,7 @@ void RaiseModelSimple(std::string plugin, std::string module)
   }
 
   void onReset() override {
+    _allLabelReset = true;
     for (int i = 0; i < 8; i++) {
       setSavedPlugin(i, "");
       setSavedModule(i, "");
@@ -210,6 +229,7 @@ void RaiseModelSimple(std::string plugin, std::string module)
       _json[i] = NULL;
       _jsondata[i] = NULL;
     }
+    textFieldText = NULL;
   }
 
   void simpleReset(int i) {
@@ -326,6 +346,7 @@ struct PresetBrowserMenuItem : ui::MenuItem {
     void onAction(const event::Action &e) override 
     {
         ModuleWidget *moduleWidget = APP->scene->rack->getModule(module->id);
+        //module->onReset();
         moduleWidget->resetAction();
         moduleWidget->loadAction(asset::user("presets") + "/" + presetName);
     }
@@ -656,6 +677,31 @@ struct RenameField : ui::TextField {
 };
 
 
+struct screwPlus : SvgButton {
+  MyLittleTools *module;
+  screwPlus() {
+    addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/screw1.svg")));
+    addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/screw2.svg")));
+
+  }
+
+  void setModule(MyLittleTools *module) {
+    this->module = module;
+  }
+
+
+  void onAction(const event::Action &e) override {
+    if (module)
+    {
+      module->_savePreset = true;
+      //ModuleWidget *moduleWidget = APP->scene->rack->getModule(module->id);
+      //moduleWidget->saveDialogX();
+    }
+  }
+};
+
+
+
 struct slotButton : SvgButton {
   MyLittleTools *module;
   int buttonid;
@@ -870,14 +916,24 @@ struct slotButton : SvgButton {
 struct MyLittleFavoritesWidget : ModuleWidget {
 
     TextField *textField;
+    slotButton *sb[8];
+    MyLittleTools *gmodule;
 
     MyLittleFavoritesWidget(MyLittleTools *module) {
 
+    gmodule = module;
     setModule(module);
     setPanel(APP->window->loadSvg(asset::plugin(pluginInstance, "res/MyLittleFavorites.svg")));
 
     addChild(createWidget<ScrewSilver>(Vec(0, 0)));
-    addChild(createWidget<ScrewSilver>(Vec(box.size.x - RACK_GRID_WIDTH, 0)));
+
+    // preset-saving-screw
+    screwPlus *sp = createWidget<screwPlus>(Vec(box.size.x - RACK_GRID_WIDTH, 5));
+    sp->setModule(module);
+    addChild(sp);
+
+
+
     addChild(createWidget<ScrewSilver>(Vec(0, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
     addChild(createWidget<ScrewSilver>(Vec(box.size.x - RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
@@ -908,16 +964,81 @@ struct MyLittleFavoritesWidget : ModuleWidget {
 
     for (int i = 0; i < 8; i++)
     {
-      slotButton *sb;
-      sb = createWidget<slotButton>(Vec(9, ystart));
+      sb[i] = createWidget<slotButton>(Vec(9, ystart));
 
-      sb->IAM = "MyLittleFavorites";
-      sb->setModule(module);
-      sb->buttonid = i;
-      sb->setLabelName();
-      addChild(sb);
+      sb[i]->IAM = "MyLittleFavorites";
+      sb[i]->setModule(module);
+      sb[i]->buttonid = i;
+      sb[i]->setLabelName();
+      addChild(sb[i]);
       ystart += yjump;
     }
+  }
+
+
+  // needed for resetAction...
+  void step() override 
+  {
+    if (gmodule)
+    {
+      if (gmodule->_allLabelReset)
+      {
+        textField->text = "";
+        gmodule->_allLabelReset = false;
+        for (int i = 0; i < 8; i++)
+        {
+          sb[i]->labelName->text = "";
+        }
+      }
+
+      if (gmodule->setTextFieldText)
+      {
+        gmodule->setTextFieldText = false;
+        textField->text = json_string_value(gmodule->textFieldText);
+      }
+
+      // fast method for correct preset-saving...
+      if (gmodule->_savePreset)
+      {
+        gmodule->_savePreset = false;
+        std::string dir = asset::user("presets");
+        system::createDirectory(dir);
+
+        std::string fn = "";
+
+        fn = textField->text;
+        fn.erase(std::remove_if( fn.begin(), fn.end(), isForbidden), fn.end());
+ 
+        osdialog_filters *filters = osdialog_filters_parse(PRESET_FILTERS);
+        DEFER({
+          osdialog_filters_free(filters);
+        });
+
+        char *path = osdialog_file(OSDIALOG_SAVE, dir.c_str(), ("mlf_" + fn).c_str(), filters);
+        if (!path) {
+          // No path selected
+          return;
+        }
+        DEFER({
+          free(path);
+        });
+
+        std::string pathStr = path;
+        std::string extension = string::filenameExtension(string::filename(pathStr));
+        if (extension.empty()) {
+          pathStr += ".vcvm";
+        }
+
+        save(pathStr);
+      }
+
+      
+
+
+
+    }    
+
+    Widget::step();
   }
 
 
@@ -936,14 +1057,19 @@ struct MyLittleFavoritesWidget : ModuleWidget {
     // text
     json_t *textJ = json_object_get(rootJ, "text");
     if (textJ)
-      textField->text = json_string_value(textJ);
+    {
+      if (gmodule) {
+        gmodule->textFieldText = json_deep_copy(textJ);
+        gmodule->setTextFieldText = true;
+      }
+    }
   }
 };
 
 
 struct MyLittleTagsWidget : ModuleWidget {
 
-    TextField *textField;
+    //TextField *textField;
     MyLittleTagsWidget(MyLittleTools *module) {
 
     setModule(module);
@@ -954,9 +1080,11 @@ struct MyLittleTagsWidget : ModuleWidget {
     addChild(createWidget<ScrewSilver>(Vec(0, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
     addChild(createWidget<ScrewSilver>(Vec(box.size.x - RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
+    /* 
     textField = createWidget<LedDisplayTextField>(Vec(9, 58));
     textField->box.size = Vec(131, 29);
     addChild(textField);
+    */
 
     heartButton *hb = createWidget<heartButton>(Vec(38, 24));
     hb->IAM = "MyLittleTags";
@@ -964,7 +1092,7 @@ struct MyLittleTagsWidget : ModuleWidget {
     hb->setModule(module);
     addChild(hb);
 
-    int ystart = 105;
+    int ystart = 80;
     int yjump = 32;
 
     for (int i = 0; i < 8; i++)
@@ -983,6 +1111,7 @@ struct MyLittleTagsWidget : ModuleWidget {
 
   }
 
+  /*
   json_t *toJson() override {
     json_t *rootJ = ModuleWidget::toJson();
 
@@ -1000,6 +1129,7 @@ struct MyLittleTagsWidget : ModuleWidget {
     if (textJ)
       textField->text = json_string_value(textJ);
   }
+  */
 };
 
 Model *modelMyLittleFavorites = createModel<MyLittleTools, MyLittleFavoritesWidget>("MyLittleFavorites");
