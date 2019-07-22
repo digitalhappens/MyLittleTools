@@ -4,7 +4,7 @@
 MyLittleTools is a plugin for [VCV Rack](https://vcvrack.com). It
 contains:
 
-* MyLittleFavorites, favorite module handling with state saving and fast preset-loading option
+* MyLittleFavorites, favorite module handling with state saving and fast preset-loading/saving option
 * MyLittleTags, fast tag-based module browsing
 
 ## MyLittleFavorites, favorite module handling
@@ -37,11 +37,13 @@ Easiest way to get started:
 
 Optionally, you can rename the field names in rename-mode (with the R-Button) for better reading. For example, you could save the "AudioInterface"-Module with your favorite settings and name it "ASIO".
 
-Optionally, you can clear a field in clear-mode (withe C-Button), which empties an field by clicking on it. 
+Optionally, you can clear a field in clear-mode (with the C-Button), which empties an field by clicking on it. 
 
 Optionally, you can fast-load a preset with the P-Button. When you have filled MyLittleFavorites with 8 of your favorite modules/states, you can save it as a preset. When you name this preset by starting with "mlf_" then this preset will appear in a list with the P-Button, you can then load it by clicking it. This way it is possible to fast switch between as many favorites as you need. The presets must be saved in the Rack/presets folder.
 
 Each favorite is saved with it's state, which means all parameter and data settings are saved within by default. 
+
+Optionally, you can fast-save your presets with the S-Button in the rightc corner. It will generate the filename from the name of your set and opens the file-saving dialog. You have to save this file in the preset-folder from Rack (which is done by default).
 
 ![MyLittleFavorites](https://raw.githubusercontent.com/digitalhappens/MyLittleTools/master/screenshots/MyLittleFavoritesExample.jpg)
 
@@ -55,6 +57,8 @@ Changes in Version 1.0.2
 * when you save Presets in MyLittleFavorites in the global /Rack/presets-Folder starting with "mlf_"
   the presets can be recalled quickly with the P-Button (so you need only one intance of the module to store all your favorites)
 * the list of currently loaded modules shows all modules currently loaded, except "MyLittleFavorites"
+* presets can also quickly saved withe "S"-Button in the right corner, filename will constructed from the name of your set
+* plugin.json has a donate link, you can donate anything if you want to keep up developing ;)
 
 Changes in Version 1.0.1
 
