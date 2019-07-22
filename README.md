@@ -43,7 +43,7 @@ Optionally, you can fast-load a preset with the P-Button. When you have filled M
 
 Each favorite is saved with it's state, which means all parameter and data settings are saved within by default. 
 
-Optionally, you can fast-save your presets with the S-Button in the rightc corner. It will generate the filename from the name of your set and opens the file-saving dialog. You have to save this file in the preset-folder from Rack (which is done by default).
+Optionally, you can fast-save your presets with the S-Button in the right corner. It will generate the filename from the name of your set and opens the file-saving dialog. You have to save this file in the preset-folder from Rack (which is done by default).
 
 Here's a short video / short manual for MyLittleTools
 
