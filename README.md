@@ -45,7 +45,7 @@ Each favorite is saved with it's state, which means all parameter and data setti
 
 Optionally, you can fast-save your presets with the S-Button in the rightc corner. It will generate the filename from the name of your set and opens the file-saving dialog. You have to save this file in the preset-folder from Rack (which is done by default).
 
-![MyLittleFavorites](https://www.youtube.com/watch?v=BCSQwT4ZiHU)
+[![MyLittleTools](https://img.youtube.com/vi/BCSQwT4ZiHU/0.jpg)](https://www.youtube.com/watch?v=BCSQwT4ZiHU)
 
 ## VIDEO HOW TO USE MYLITTLEFAVORITES ##
 
