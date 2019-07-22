@@ -47,7 +47,7 @@ Optionally, you can fast-save your presets with the S-Button in the rightc corne
 
 Here's a short video / short manual for MyLittleTools
 
-[![MyLittleTools](https://img.youtube.com/vi/BCSQwT4ZiHU/100.jpg)](https://www.youtube.com/watch?v=BCSQwT4ZiHU)
+[![MyLittleTools](https://img.youtube.com/vi/BCSQwT4ZiHU/0.jpg)](https://www.youtube.com/watch?v=BCSQwT4ZiHU)
 
 ## VIDEO HOW TO USE MYLITTLEFAVORITES ##
 
