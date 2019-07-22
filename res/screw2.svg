@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="3mm"
+   height="3mm"
+   viewBox="0 0 3 3"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="screw2.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="31.678384"
+     inkscape:cx="14.256768"
+     inkscape:cy="6.1470104"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1029"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       position="1.4950389,4.6438079"
+       orientation="1,0"
+       id="guide841"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="-5.1616426,1.3864606"
+       orientation="0,1"
+       id="guide843"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-294)">
+    <g
+       aria-label="S"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.86799502px;line-height:1.25;font-family:Webdings;-inkscape-font-specification:Webdings;letter-spacing:0px;word-spacing:0px;fill:#900000;fill-opacity:1;stroke:none;stroke-width:0.09669986"
+       id="text873">
+      <path
+         d="m 0.24267017,295.97862 0.81401653,-0.051 q 0.026441,0.19831 0.1076542,0.30219 0.1322068,0.16809 0.3777338,0.16809 0.183201,0 0.2814118,-0.085 0.1000995,-0.0869 0.1000995,-0.2002 0,-0.10765 -0.094434,-0.19264 -0.094434,-0.085 -0.4381713,-0.16054 -0.56282351,-0.12654 -0.80268452,-0.33618 -0.24174969,-0.20964 -0.24174969,-0.53449 0,-0.21342 0.12276351,-0.40229 0.12465218,-0.19076 0.37206788,-0.29841 0.24930432,-0.10954 0.68180972,-0.10954 0.5307161,0 0.8083505,0.19831 0.2795231,0.19642 0.3324058,0.62704 l -0.8064619,0.0472 q -0.032107,-0.18698 -0.1359842,-0.27197 -0.1019881,-0.085 -0.2833004,-0.085 -0.1492049,0 -0.2247516,0.0642 -0.075547,0.0623 -0.075547,0.15298 0,0.0661 0.062326,0.11899 0.060437,0.0548 0.2870777,0.10198 0.5609349,0.12088 0.8026845,0.24553 0.2436384,0.12277 0.3531812,0.30597 0.1114315,0.1832 0.1114315,0.40984 0,0.2663 -0.1473162,0.49105 -0.1473162,0.22475 -0.4117299,0.34185 -0.2644137,0.11521 -0.6667003,0.11521 -0.70636241,0 -0.97833081,-0.27197 -0.2719684,-0.27197 -0.30785312,-0.69125 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, ';stroke-width:0.09669986;fill:#900000;fill-opacity:1"
+         id="path875" />
+    </g>
+  </g>
+</svg>
