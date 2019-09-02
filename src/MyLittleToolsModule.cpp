@@ -1,6 +1,7 @@
 #include "MyLittleTools.hpp"
 #include "plugin.hpp"
 #include "window.hpp"
+#include "tag.hpp"
 #include <algorithm>
 #include <functional>
 #include <random>
@@ -135,7 +136,27 @@ void RaiseModelSimple(std::string plugin, std::string module)
   {
     bool tagFounded = false;
     tagsCount = 0;
-    for (const std::string &tag : plugin::allowedTags) {
+
+      for (int i = 0; i < (int)tag::tagAliases.size(); i++) {
+      //for (const std::string& tag : tag::tagAliases) {
+        
+        // choose the smallest tag in size!!!!!
+        uint iamshort = 5000;
+        int chid = 0;
+        int counter = 0;
+
+        for (const std::string& alias : tag::tagAliases[i]) {
+          
+          if (alias.length() < iamshort){
+            chid = counter;
+            iamshort = alias.length();
+          }
+          counter++;
+        }
+
+        std::string tag = tag::tagAliases[i][chid];
+
+
       for (const auto& p : rack::plugin::plugins) 
       {
         for (const auto& m : p->models) 
@@ -147,10 +168,12 @@ void RaiseModelSimple(std::string plugin, std::string module)
             break;
           }
 
+          
           for (const auto& t : m->tags) 
           {
-            if (!t.compare(trim(tag))) 
+            if (i == t) 
             {
+              INFO("TAG %s", tag.c_str());
               for (int i = 0; i < tagsCount; i++)
               {
                 if (tags[i] == tag)
@@ -165,6 +188,7 @@ void RaiseModelSimple(std::string plugin, std::string module)
                 tags[tagsCount] = tag;
                 tagsCount++;
                 tagFounded = true;
+
                 break;
               }
             }
@@ -894,7 +918,25 @@ struct slotButton : SvgButton {
       {
         for (const auto& t : m->tags) 
         {
-          if (t == labelName->text) 
+          
+          uint iamshort = 5000;
+          int chid = 0;
+          int counter = 0;
+
+          for (const std::string& alias : tag::tagAliases[t]) {
+            
+            if (alias.length() < iamshort){
+              chid = counter;
+              iamshort = alias.length();
+            }
+            counter++;
+          }
+
+          std::string ttag = tag::tagAliases[t][chid];
+
+
+          //std::string ttag = tag::tagAliases[t][0];
+          if (ttag == labelName->text)
           {
             ModuleMenuItem *item1 = new ModuleMenuItem;
             //item1->slot = slot;
