@@ -51,6 +51,11 @@ Here's a short video / short manual for MyLittleTools
 
 ## VIDEO HOW TO USE MYLITTLEFAVORITES ##
 
+Changes in Version 1.0.3
+
+* a new version of Rack introduced a new tag-structure which affected MyLittleTags, it's corrected
+(also it for displaying MyLittleTags chooses the smallest in size tag-alias like "LFO" instead of "Low-frequency oscillator")
+
 Changes in Version 1.0.2
 
 * now the state of the modules is saved (parameters and data)
