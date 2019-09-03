@@ -141,7 +141,7 @@ void RaiseModelSimple(std::string plugin, std::string module)
       //for (const std::string& tag : tag::tagAliases) {
         
         // choose the smallest tag in size!!!!!
-        uint iamshort = 5000;
+        size_t iamshort = 5000;
         int chid = 0;
         int counter = 0;
 
@@ -919,7 +919,7 @@ struct slotButton : SvgButton {
         for (const auto& t : m->tags) 
         {
           
-          uint iamshort = 5000;
+          size_t iamshort = 5000;
           int chid = 0;
           int counter = 0;
 
